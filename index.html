@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <textarea name="txt" id="message" style="box-sizing: border-box;width:100%" rows="10"></textarea>
+    <p id="content"></p>
+
+    <script>
+        function secure(input) {
+            return input
+                .replace(/</g, '&lt;')
+                .replace(/"/g, '&quot;')
+                .replace(/http:\/\/(\S+)/g, '<a href="http://$1">$1</a>') // http://example.com -> <a href="http://example.com">http://example.com</a>
+                .replace(/https:\/\/(\S+)/g, '<a href="https://$1">$1</a>') // https://example.com -> <a href="https://example.com">https://example.com</a>
+        }
+
+        const message = document.getElementById('message');
+        const content = document.getElementById('content');
+
+        const startText = decodeURI(document.location.hash.slice(1));
+        message.value = startText;
+        content.innerHTML = secure(startText);
+
+        function onchange() {
+            content.innerHTML = secure(message.value);
+            document.location.hash = message.value;
+        }
+        message.onchange = onchange;
+        message.onkeyup = onchange;
+    </script>
+</body>
+</html>
