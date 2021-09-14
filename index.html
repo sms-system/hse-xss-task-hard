@@ -29,7 +29,7 @@
 
         function onchange() {
             content.innerHTML = secure(message.value);
-            document.location.hash = message.value;
+            document.location.hash = encodeURI(message.value);
         }
         message.onchange = onchange;
         message.onkeyup = onchange;
