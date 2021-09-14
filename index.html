@@ -15,6 +15,7 @@
             return input
                 .replace(/</g, '&lt;')
                 .replace(/"/g, '&quot;')
+                .replace(/\n/g, '<br>')
                 .replace(/http:\/\/(\S+)/g, '<a href="http://$1">$1</a>') // http://example.com -> <a href="http://example.com">http://example.com</a>
                 .replace(/https:\/\/(\S+)/g, '<a href="https://$1">$1</a>') // https://example.com -> <a href="https://example.com">https://example.com</a>
         }
